@@ -7,19 +7,29 @@ jobs:
     runs-on: windows-latest
     environment: "Generic Web GL Build Cake Environment"
     steps:
-    - uses: actions/setup-dotnet@v1
-      with:  
-        dotnet-version: '6.0'
-    - uses: actions/checkout@v2
-    - run: "dotnet new tool-manifest"
-    - run: "dotnet tool install Cake.Tool --version 3.0.0"
-    - run: >
-        cmd.exe /c "dotnet cake
-         --Telegram_ApiId=${{secrets.TELEGRAM_API_ID}}
-         --Telegram_ApiHash=${{secrets.TELEGRAM_API_HASH}}
-         --Telegram_PhoneNumber=${{secrets.PHONE_NUMBER}}
-         --Telegram_ChatId=${{secrets.TELEGRAM_CHAT_ID}}
-         --Ftp_Host=${{secrets.FTP_HOST}}
-         --Ftp_Login=${{secrets.FTP_LOGIN}}
-         --Ftp_Password=${{secrets.FTP_PASSWORD}}
-         --Telegram_SessionPath=D:\MyTelegramSession.session"
+      - name: Setup Unity
+        uses: unity-actions/setup-unity@v1
+        with:
+          unityVersion: 2021.3.15f1
+          install-path: "D:/UnityInstallations/"
+
+      - name: Setup Dotnet
+        uses: actions/setup-dotnet@v1
+        with:  
+          dotnet-version: '6.0'
+
+      - name: Checkout git
+        uses: actions/checkout@v2
+
+      - run: "dotnet new tool-manifest"
+      - run: "dotnet tool install Cake.Tool --version 3.0.0"
+      - run: >
+          cmd.exe /c "dotnet cake
+          --Telegram_ApiId=${{secrets.TELEGRAM_API_ID}}
+          --Telegram_ApiHash=${{secrets.TELEGRAM_API_HASH}}
+          --Telegram_PhoneNumber=${{secrets.PHONE_NUMBER}}
+          --Telegram_ChatId=${{secrets.TELEGRAM_CHAT_ID}}
+          --Ftp_Host=${{secrets.FTP_HOST}}
+          --Ftp_Login=${{secrets.FTP_LOGIN}}
+          --Ftp_Password=${{secrets.FTP_PASSWORD}}
+          --Telegram_SessionPath=D:\MyTelegramSession.session"
