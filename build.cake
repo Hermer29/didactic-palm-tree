@@ -18,7 +18,7 @@ const string ArtifactsFolderPath = "./artifacts";
 // var tgClient = new WTelegram.Client(TelegramConfig, opened);
 // var account = await tgClient.LoginUserIfNeeded();
 // var dialogs = await tgClient.Channels_GetAdminedPublicChannels();
-var lastCommit = GitLog(new DirectoryPath("."), 1).First();
+//var lastCommit = GitLog(new DirectoryPath("."), 1).First();
 
 var target = Argument("target", SendBuildNotificationEndingTask);
 
