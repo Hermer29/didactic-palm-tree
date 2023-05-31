@@ -14,7 +14,7 @@ jobs:
     - run: "dotnet new tool-manifest"
     - run: "dotnet tool install Cake.Tool --version 3.0.0"
     - run: >
-        "dotnet cake 
+        & "dotnet cake
          --Telegram_ApiId=${{secrets.TELEGRAM_API_ID}}
          --Telegram_ApiHash=${{secrets.TELEGRAM_API_HASH}}
          --Telegram_PhoneNumber=${{secrets.PHONE_NUMBER}}
