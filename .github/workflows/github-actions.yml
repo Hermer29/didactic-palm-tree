@@ -5,6 +5,7 @@ on: push
 jobs:
   build:
     runs-on: windows-latest
+    environment: "Generic Web GL Build Cake Environment"
     steps:
     - uses: actions/setup-dotnet@v1
       with:  
