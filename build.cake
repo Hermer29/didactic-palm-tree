@@ -30,10 +30,7 @@ Task(SendBuildNotificationStartingTask)
     .Does(() => 
 {
     return;
-    if(lastCommit.Message.Contains("nobuild"))
-    {
-        throw new OperationCanceledException("Build canceled");
-    }
+
     WriteTelegramMessage(CreateStartingTelegramMessage());
 });
 
@@ -46,7 +43,7 @@ async void WriteTelegramMessage(string message)
 string CreateStartingTelegramMessage()
 {
     var message = $"❗❗❗Начат билд по проекту {ProjectName}! " + 
-        $"Произошедшие изменения: {lastCommit.Message}\n";
+        $"Произошедшие изменения:\n";
     return message;
 }
 #endregion
@@ -196,9 +193,8 @@ string TelegramConfig(string what)
 
 string CreateEndingTelegramMessage()
 {
-    var lastCommit = GitLog(new DirectoryPath("."), 1).First();
     var message = $"❗❗❗Новый билд по проекту {ProjectName}! " + 
-        $"Произошедшие изменения: {lastCommit.Message}\n" +
+        $"Произошедшие изменения: \n" +
         $"Демонстрационная ссылка: https://immgames.ru/Games/Wolf/{ProjectName}. "+
         $"Внимание! После следующего обновления эта версия игры \"сгорит\" из ссылки.\n" +
         $"Прилагается архив с билдом:";
