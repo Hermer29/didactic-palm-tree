@@ -39,8 +39,8 @@ Task(SendBuildNotificationStartingTask)
 
 async void WriteTelegramMessage(string message)
 {
-    var dialog = GetTargetChat();
-    await tgClient.SendMessageAsync(dialog, message);
+    //var dialog = GetTargetChat();
+    //await tgClient.SendMessageAsync(dialog, message);
 }
 
 string CreateStartingTelegramMessage()
@@ -167,16 +167,16 @@ Task(SendBuildNotificationEndingTask)
     .IsDependentOn(ZipArtifactsTask)
     .Does(async () => 
 {
-    var handle = await tgClient.UploadFileAsync(pathToZippedBuild);
-    var targetChat = GetTargetChat();
-    var message = await tgClient.SendMediaAsync(targetChat, CreateEndingTelegramMessage(), handle);
+    //var handle = await tgClient.UploadFileAsync(pathToZippedBuild);
+    //var targetChat = GetTargetChat();
+    //var message = await tgClient.SendMediaAsync(targetChat, CreateEndingTelegramMessage(), handle);
 });
 
-ChatBase GetTargetChat()
-{
-    Int64 chatId = Int64.Parse(Context.Configuration.GetValue(TelegramChatIdParameter));
-    return dialogs.chats[chatId];
-}
+// ChatBase GetTargetChat()
+// {
+//     Int64 chatId = Int64.Parse(Context.Configuration.GetValue(TelegramChatIdParameter));
+//     return dialogs.chats[chatId];
+// }
 
 string TelegramConfig(string what)
 {
