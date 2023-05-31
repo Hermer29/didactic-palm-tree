@@ -14,10 +14,10 @@ using System.Security.Cryptography;
 string ProjectName = Context.Configuration.GetValue("Project-Name");
 const string ArtifactsFolderPath = "./artifacts";
 
-var opened = System.IO.File.Open(TelegramSessionPath, FileMode.OpenOrCreate);
-var tgClient = new WTelegram.Client(TelegramConfig, opened);
-var account = await tgClient.LoginUserIfNeeded();
-var dialogs = await tgClient.Channels_GetAdminedPublicChannels();
+// var opened = System.IO.File.Open(TelegramSessionPath, FileMode.OpenOrCreate);
+// var tgClient = new WTelegram.Client(TelegramConfig, opened);
+// var account = await tgClient.LoginUserIfNeeded();
+// var dialogs = await tgClient.Channels_GetAdminedPublicChannels();
 var lastCommit = GitLog(new DirectoryPath("."), 1).First();
 
 var target = Argument("target", SendBuildNotificationEndingTask);
@@ -29,6 +29,7 @@ const string SendBuildNotificationStartingTask = "Send-Build-Notification-Start"
 Task(SendBuildNotificationStartingTask)
     .Does(() => 
 {
+    return;
     if(lastCommit.Message.Contains("nobuild"))
     {
         throw new OperationCanceledException("Build canceled");
@@ -160,7 +161,7 @@ const string TelegramApiIdParameter = "Telegram_ApiId";
 const string TelegramApiHashParameter = "Telegram_ApiHash";
 const string TelegramPhoneNumberParameter = "Telegram_PhoneNumber";
 
-string TelegramSessionPath => Context.Configuration.GetValue(TelegramSessionPathParameter);
+//string TelegramSessionPath => Context.Configuration.GetValue(TelegramSessionPathParameter);
 
 Task(SendBuildNotificationEndingTask)
     .IsDependentOn(ZipArtifactsTask)
